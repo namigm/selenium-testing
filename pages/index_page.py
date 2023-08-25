@@ -22,11 +22,10 @@ class IndexPage(BaseObject):
     @allure.step("entering username")  # ?
     def __enter_username(self, user_name):
         self.send_keys(locator=self.USERNAME_FIELD, data=user_name, timeout=25)
-        # self.send_keys(locator=self.USERNAME_FIELD, data="correct_username", timeout=25)
+
 
     @allure.step("entering password")
     def __enter_password(self, password):
-        # self.send_keys(self.PASSWORD_FIELD, "correct_password")
         self.send_keys(self.PASSWORD_FIELD, password)
 
     @allure.step("clicking to log in button")

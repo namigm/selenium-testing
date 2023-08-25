@@ -3,6 +3,8 @@ from selenium.webdriver.support import expected_conditions as ec
 from selenium.webdriver.support.ui import WebDriverWait
 from support.custom_exception import VisibleElementNotFound, ClickableElementNotFound
 from support.logger import save_log
+import json
+import os
 
 
 class BaseObject:
@@ -27,6 +29,16 @@ class BaseObject:
         except TimeoutException:
             self.LOG.error(f"Requested element - {locator} isn't visible")
             raise VisibleElementNotFound("Element is not visible")
+
+    def _are_visible(self, locator, timeout=5):
+        try:
+            visible_elements = self.__wait_element(timeout=timeout).until(
+                ec.visibility_of_all_elements_located(locator))
+            self.LOG.info(f"Requested elements - {locator} are visible")
+            return visible_elements
+        except TimeoutException:
+            self.LOG.error(f"Requested elements - {locator} are not visible")
+            raise VisibleElementNotFound("Elements are not visible")
 
     def _is_clickable(self, locator, timeout=5):
         try:
@@ -67,9 +79,14 @@ class BaseObject:
         self.LOG.info(f"Element - {locator} has been found and visible")
         return element
 
-    # Try nujen ili net? Vnutri __is_visible est je exception
+    def get_elements(self, locator, timeout=5):
+        element = self._are_visible(locator=locator, timeout=timeout)
+        self.LOG.info(f"Elements - {locator} have been found and visible")
+        return element
 
     def get_text(self, locator, timeout=5):
         element = self._is_visible(timeout=timeout, locator=locator)
         self.LOG.info(f"Text - {locator} has been found and visible")
         return element.text
+
+

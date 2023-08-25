@@ -1,7 +1,8 @@
 import pytest
+from env_creds import *
 
 def test_successful_login(index_page):
-    index_page.login(user_name="correct_username", password="correct_password")
+    index_page.login(USER_NAME, PASSWORD)
     index_page.is_logged_in()
 
 
@@ -18,8 +19,6 @@ def test_unsuccessful_login(index_page, user_name, password, expected_result):
     index_page.login(user_name, password)
     index_page.check_error_message(expected_result)
 
-
-
-
-
+# Sozdat Json file, kuda napishesh odin obyekt, v etom obyekte budet para kluc znacenie. Eti znaceniya doljni parol user.
+# Potom nado sdelat deserializaciya dannix, i pomestit ix v pyton, potom ispolzovat sdel eti znaceniya
 
