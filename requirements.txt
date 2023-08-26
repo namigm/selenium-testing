@@ -3,3 +3,4 @@ selenium
 webdriver-manager
 pytest-pyreport
 allure-pytest
+python-dotenv
