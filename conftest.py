@@ -22,6 +22,7 @@ def get_chrome_options():
 @pytest.fixture
 def get_webdriver(get_chrome_options):
     driver = webdriver.Chrome(options=get_chrome_options, service=Service(ChromeDriverManager().install()))
+    driver.maximize_window()
     return driver
 
 
@@ -54,7 +55,7 @@ def input_click(get_webdriver):
 
 
 @pytest.fixture
-def drag_drop(get_webdriver):
+def drag_and_drop(get_webdriver):
     get_webdriver.get(DRAG_DROP_URL)
     yield DragDrop(get_webdriver)
     get_webdriver.quit()
