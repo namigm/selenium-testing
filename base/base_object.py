@@ -4,6 +4,8 @@ from selenium.webdriver.support.ui import WebDriverWait
 from support.custom_exception import VisibleElementNotFound, ClickableElementNotFound
 from support.logger import save_log
 from seletools.actions import drag_and_drop
+from selenium.webdriver.common.action_chains import ActionChains
+from selenium.webdriver.support.ui import Select
 
 
 class BaseObject:
@@ -73,7 +75,7 @@ class BaseObject:
             self.LOG.info(f"Element - {locator} isn't displayed")
             raise VisibleElementNotFound("Element is not visible")
 
-    def get_element(self, locator, timeout=5):
+    def get_visible_element(self, locator, timeout=5):
         element = self._is_visible(timeout=timeout, locator=locator)
         self.LOG.info(f"Element - {locator} has been found and visible")
         return element
@@ -81,6 +83,11 @@ class BaseObject:
     def get_elements(self, locator, timeout=5):
         element = self._are_visible(locator=locator, timeout=timeout)
         self.LOG.info(f"Elements - {locator} have been found and visible")
+        return element
+#####
+    def get_element(self, locator):
+        element = self.driver.find_element(*locator)
+        self.LOG.info(f"Not visible elements - {locator} have been found")
         return element
 
     def get_text(self, locator, timeout=5):
@@ -95,3 +102,10 @@ class BaseObject:
 
     def drag_drop(self, source, target):
         drag_and_drop(self.driver, self._is_visible(source), self._is_visible(target))
+
+    def move_to_visible_element(self, locator):
+        ActionChains(self.driver).move_to_element(self.get_visible_element(locator))
+
+    def select_element(self, locator, text):
+        select = Select(self.get_element(locator))
+        select.select_by_visible_text(text)

@@ -7,6 +7,7 @@ from pages.index_page import IndexPage
 from pages.check_validate import CheckValidate
 from pages.input_click import InputClick
 from pages.drag_drop import DragDrop
+from pages.day_night_mode import DayNightMode
 import allure
 from datetime import datetime
 from env_setup import *
@@ -58,6 +59,12 @@ def input_click(get_webdriver):
 def drag_and_drop(get_webdriver):
     get_webdriver.get(DRAG_DROP_URL)
     yield DragDrop(get_webdriver)
+    get_webdriver.quit()
+
+@pytest.fixture
+def day_night(get_webdriver):
+    get_webdriver.get(BASE_URL)
+    yield DayNightMode(get_webdriver)
     get_webdriver.quit()
 
 
