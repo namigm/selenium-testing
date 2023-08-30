@@ -1,8 +1,8 @@
 import pytest
-from env_creds import *
+from env_setup import *
 
 def test_successful_login(index_page):
-    index_page.login(USER_NAME, PASSWORD)
+    index_page.login(WAPP_USER_NAME, WAPP_PASSWORD)
     index_page.is_logged_in()
 
 
