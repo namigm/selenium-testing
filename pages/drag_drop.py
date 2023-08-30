@@ -22,7 +22,7 @@ class DragDrop(BaseObject):
             self.drag_drop(source_element, target_element)
 
     def check_done_btn(self):
-        assert self.get_element(self.DONE_BTN)
+        assert self.get_visible_element(self.DONE_BTN)
 
     def check_sequence(self):
         assert self.get_items_text(self.LETTERS) == self.EXPECTED_LETTER_ORDERS

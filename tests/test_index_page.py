@@ -12,7 +12,7 @@ def test_successful_login(index_page):
 
 
 @pytest.mark.parametrize('user_name,password,expected_result',
-                         [('correct_username', 'correct_passward', 'Password or userme is incorrect'),
+                         [('correct_username', 'correct_passward', 'Password or username is incorrect'),
                           ('', 'correct_password', 'Username field cannot be empty')],
                          ids=['Not correct credentials', 'Empty password'])
 def test_unsuccessful_login(index_page, user_name, password, expected_result):
