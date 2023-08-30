@@ -3,14 +3,14 @@ from selenium import webdriver
 from selenium.webdriver.chrome.options import Options as ChromeOptions
 from selenium.webdriver.chrome.service import Service
 from webdriver_manager.chrome import ChromeDriverManager
-
-import env_setup
 from pages.index_page import IndexPage
 from pages.check_validate import CheckValidate
 from pages.input_click import InputClick
+from pages.drag_drop import DragDrop
 import allure
 from datetime import datetime
 from env_setup import *
+
 
 @pytest.fixture
 def get_chrome_options():
@@ -22,6 +22,7 @@ def get_chrome_options():
 @pytest.fixture
 def get_webdriver(get_chrome_options):
     driver = webdriver.Chrome(options=get_chrome_options, service=Service(ChromeDriverManager().install()))
+    driver.maximize_window()
     return driver
 
 
@@ -45,10 +46,18 @@ def check_validate(get_webdriver):
     yield CheckValidate(get_webdriver)
     get_webdriver.quit()
 
+
 @pytest.fixture
 def input_click(get_webdriver):
     get_webdriver.get(INPUT_CLICK_URL)
     yield InputClick(get_webdriver)
+    get_webdriver.quit()
+
+
+@pytest.fixture
+def drag_and_drop(get_webdriver):
+    get_webdriver.get(DRAG_DROP_URL)
+    yield DragDrop(get_webdriver)
     get_webdriver.quit()
 
 

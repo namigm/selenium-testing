@@ -3,8 +3,7 @@ from selenium.webdriver.support import expected_conditions as ec
 from selenium.webdriver.support.ui import WebDriverWait
 from support.custom_exception import VisibleElementNotFound, ClickableElementNotFound
 from support.logger import save_log
-import json
-import os
+from seletools.actions import drag_and_drop
 
 
 class BaseObject:
@@ -89,4 +88,10 @@ class BaseObject:
         self.LOG.info(f"Text - {locator} has been found and visible")
         return element.text
 
+    def get_items_text(self, locator, timeout=15):
+        elements = self._are_visible(timeout=timeout, locator=locator)
+        self.LOG.info(f"Texts - {locator} have been found and visible")
+        return [element.text for element in elements]
 
+    def drag_drop(self, source, target):
+        drag_and_drop(self.driver, self._is_visible(source), self._is_visible(target))
