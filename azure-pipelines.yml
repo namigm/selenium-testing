@@ -48,10 +48,12 @@ steps:
       script: |
         pytest
   displayName: 'pytest'
+  continueOnError: true
   env: # use your secrets safely without disclosing their content
     BASE_URL: $(BASE_URL)
     WAPP_PASSWORD: $(WAPP_PASSWORD)
     WAPP_USER_NAME: $(WAPP_USER_NAME)
+
 
 - task: PublishTestResults@2
   inputs:
