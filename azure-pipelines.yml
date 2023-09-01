@@ -1,0 +1,52 @@
+parameters: # Parametrize test run by scopes
+- name: subscription # This will add 2 options as a button on ADO to run selected scope by manual trigger
+  displayName: Scopes
+  type: string
+  default: regression # Default value in case if pipelines started not by manual trigger
+  values:
+  - smoke
+  - regression
+
+schedules: # Pipelines will run automatically on a daily basis using CRON syntax
+- cron: "0 0 * * *"
+  displayName: Daily midnight build
+  branches:
+    include:
+    - master
+
+trigger:
+- master
+
+pool:
+   vmImage: 'windows-latest'
+
+steps:
+- task: UsePythonVersion@0
+  inputs:
+    versionSpec: '3.9'
+    addToPath: true
+    architecture: 'x64'
+
+- script: |
+- task: CmdLine@2
+  inputs:
+    script: |
+      python -m pip install --upgrade pip
+      pip install -r requirements.txt
+  displayName: 'Install dependencies'
+
+
+- task: CmdLine@2
+  inputs:
+    ${{ if contains(parameters.subscription, 'smoke') }}: # Condition to run only smoke tests. Should be configurated in pytest.ini config file in case if you're using Pytest
+      script: |
+        pytest -m smoke
+    ${{ if contains(parameters.subscription, 'regression') }}: # Condition to run pytest with default run options
+      script: |
+        pytest
+  displayName: 'pytest'
+
+- task: PublishTestResults@2
+  inputs:
+    testResultsFormat: 'JUnit'
+    testResultsFiles: 'result.xml'
