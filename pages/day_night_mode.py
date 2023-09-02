@@ -81,9 +81,8 @@ class DayNightMode(BaseObject):
         :return:
         """
         self.click(self.DROP_DOWN_LIST)
-
+        time.sleep(5)
         self.click(self.DD_PAGE)
-        self.LOG.info("page_drag_drop, passed clicking")
 
 
     def page_input_click(self):
@@ -92,7 +91,6 @@ class DayNightMode(BaseObject):
         :return:
         """
         self.click(self.DROP_DOWN_LIST)
-        time.sleep(5)
         self.click(self.IC_PAGE)
 
 
