@@ -1,3 +1,4 @@
+@pytest.mark.smoke
 def test_night_mode(day_night):
     day_night.check_night_mode()
 
