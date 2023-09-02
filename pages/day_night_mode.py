@@ -1,3 +1,5 @@
+import time
+
 from selenium.common import NoSuchElementException
 from support.logger import save_log
 from pages.index_page import IndexPage
@@ -79,6 +81,7 @@ class DayNightMode(BaseObject):
         :return:
         """
         self.click(self.DROP_DOWN_LIST)
+
         self.click(self.DD_PAGE)
         self.LOG.info("page_drag_drop, passed clicking")
 
@@ -89,6 +92,7 @@ class DayNightMode(BaseObject):
         :return:
         """
         self.click(self.DROP_DOWN_LIST)
+        time.sleep(5)
         self.click(self.IC_PAGE)
 
 

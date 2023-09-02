@@ -68,8 +68,8 @@ class BaseObject:
 
     def is_displayed(self, locator, timeout=5):
         try:
-            self.LOG.info(f"Element - {locator} is displayed")
             self._is_visible(timeout=timeout, locator=locator)
+            self.LOG.info(f"Element - {locator} is displayed")
             return True
         except TimeoutException:
             self.LOG.info(f"Element - {locator} isn't displayed")
