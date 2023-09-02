@@ -41,7 +41,7 @@ class BaseObject:
             self.LOG.error(f"Requested elements - {locator} are not visible")
             raise VisibleElementNotFound("Elements are not visible")
 
-    def _is_clickable(self, locator, timeout=15):
+    def _is_clickable(self, locator, timeout=5):
         try:
             clickable_element = self.__wait_element(timeout=timeout).until(ec.element_to_be_clickable(locator))
             self.LOG.info(f"Requested element - {locator} is clickable")
@@ -58,10 +58,10 @@ class BaseObject:
             self.LOG.error(f"Data - {data} hasn't been sent using element - {locator}")
             raise VisibleElementNotFound("Element is not visible")
 
-    def click(self, locator, timeout=15):
+    def click(self, locator, timeout=5):
         try:
-            self.LOG.info(f"Element - {locator} has been clicked")
             self._is_clickable(timeout=timeout, locator=locator).click()
+            self.LOG.info(f"Element - {locator} has been clicked")
         except TimeoutException:
             self.LOG.info(f"Element - {locator} hasn't been clicked")
             raise ClickableElementNotFound("Element is not visible")
