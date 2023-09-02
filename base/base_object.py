@@ -41,7 +41,7 @@ class BaseObject:
             self.LOG.error(f"Requested elements - {locator} are not visible")
             raise VisibleElementNotFound("Elements are not visible")
 
-    def _is_clickable(self, locator, timeout=5):
+    def _is_clickable(self, locator, timeout=15):
         try:
             clickable_element = self.__wait_element(timeout=timeout).until(ec.element_to_be_clickable(locator))
             self.LOG.info(f"Requested element - {locator} is clickable")
