@@ -15,7 +15,7 @@ class DayNightMode(BaseObject):
     IC_PAGE = (By.LINK_TEXT, "Input and Click")
     CS_PAGE = (By.LINK_TEXT, "Checkbox and Scroll")
     CV_PAGE = (By.LINK_TEXT, "Check and Validate")
-    SV_PAGE = (By.LINK_TEXT, "Sort by")
+    SB_PAGE = (By.LINK_TEXT, "Sort by")
 
     LOG = save_log()
 
@@ -80,6 +80,8 @@ class DayNightMode(BaseObject):
         """
         self.click(self.DROP_DOWN_LIST)
         self.click(self.DD_PAGE)
+        self.LOG.info("page_drag_drop, passed clicking")
+
 
     def page_input_click(self):
         """
@@ -88,6 +90,7 @@ class DayNightMode(BaseObject):
         """
         self.click(self.DROP_DOWN_LIST)
         self.click(self.IC_PAGE)
+
 
     def page_check_scroll(self):
         """
@@ -111,7 +114,8 @@ class DayNightMode(BaseObject):
         :return:
         """
         self.click(self.DROP_DOWN_LIST)
-        self.click(self.DD_PAGE)
+        self.click(self.SB_PAGE)
+
 
     def back_button(self):
         """
