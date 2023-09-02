@@ -58,7 +58,7 @@ class BaseObject:
             self.LOG.error(f"Data - {data} hasn't been sent using element - {locator}")
             raise VisibleElementNotFound("Element is not visible")
 
-    def click(self, locator, timeout=5):
+    def click(self, locator, timeout=15):
         try:
             self.LOG.info(f"Element - {locator} has been clicked")
             self._is_clickable(timeout=timeout, locator=locator).click()
