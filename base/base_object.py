@@ -106,6 +106,12 @@ class BaseObject:
     def move_to_visible_element(self, locator):
         ActionChains(self.driver).move_to_element(self.get_visible_element(locator))
 
+    def move_to_element(self, locator):
+        element = self.driver.find_element(*locator)
+        ActionChains(self.driver).move_to_element(element).perform()
+
+
+
     def select_element(self, locator, text):
         select = Select(self.get_element(locator))
         select.select_by_visible_text(text)

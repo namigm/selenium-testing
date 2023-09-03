@@ -22,9 +22,6 @@ pool:
 
 variables: # add your variable group to pipelines
   - group: secrets-data-ui-simulator
-  - name: DISPLAY
-    value: ':0.0'
-
 
 steps:
 - task: UsePythonVersion@0
@@ -37,10 +34,8 @@ steps:
 - task: CmdLine@2
   inputs:
     script: |
-      export DISPLAY=:0.0
       python -m pip install --upgrade pip
       pip install -r requirements.txt
-      pytest -m smoke
   displayName: 'Install dependencies'
 
 

@@ -12,6 +12,7 @@ class DayNightMode(BaseObject):
     NIGHT_MODE = (By.CSS_SELECTOR, '.night-mode')
     SWITCH_MODE_BTN = (By.CSS_SELECTOR, '.toggle-slider')
     BACK_BTN = (By.CSS_SELECTOR, '.back-button')
+    # DROP_DOWN_LIST = (By.CSS_SELECTOR, 'select-text')
     DROP_DOWN_LIST = (By.CSS_SELECTOR, '.dropdown')
     DD_PAGE = (By.LINK_TEXT, "Drag and Drop")
     IC_PAGE = (By.LINK_TEXT, "Input and Click")
@@ -80,7 +81,8 @@ class DayNightMode(BaseObject):
         function just clicking to drop down list and select page
         :return:
         """
-        self.click(self.DROP_DOWN_LIST)
+        self.move_to_element(self.DROP_DOWN_LIST)
+        # self.click(self.DROP_DOWN_LIST)
         time.sleep(5)
         self.click(self.DD_PAGE)
 
