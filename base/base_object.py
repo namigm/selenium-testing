@@ -95,7 +95,7 @@ class BaseObject:
         self.LOG.info(f"Text - {locator} has been found and visible")
         return element.text
 
-    def get_items_text(self, locator, timeout=15):
+    def get_items_text(self, locator, timeout=5):
         elements = self._are_visible(timeout=timeout, locator=locator)
         self.LOG.info(f"Texts - {locator} have been found and visible")
         return [element.text for element in elements]
@@ -104,12 +104,11 @@ class BaseObject:
         drag_and_drop(self.driver, self._is_visible(source), self._is_visible(target))
 
     def move_to_visible_element(self, locator):
-        ActionChains(self.driver).move_to_element(self.get_visible_element(locator))
+        ActionChains(self.driver).move_to_element(self.get_visible_element(locator)).perform()
 
     def move_to_element(self, locator):
         element = self.driver.find_element(*locator)
         ActionChains(self.driver).move_to_element(element).perform()
-
 
 
     def select_element(self, locator, text):

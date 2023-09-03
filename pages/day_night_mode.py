@@ -12,7 +12,6 @@ class DayNightMode(BaseObject):
     NIGHT_MODE = (By.CSS_SELECTOR, '.night-mode')
     SWITCH_MODE_BTN = (By.CSS_SELECTOR, '.toggle-slider')
     BACK_BTN = (By.CSS_SELECTOR, '.back-button')
-    # DROP_DOWN_LIST = (By.CSS_SELECTOR, 'select-text')
     DROP_DOWN_LIST = (By.CSS_SELECTOR, '.dropdown')
     DD_PAGE = (By.LINK_TEXT, "Drag and Drop")
     IC_PAGE = (By.LINK_TEXT, "Input and Click")
@@ -81,9 +80,7 @@ class DayNightMode(BaseObject):
         function just clicking to drop down list and select page
         :return:
         """
-        self.move_to_element(self.DROP_DOWN_LIST)
-        # self.click(self.DROP_DOWN_LIST)
-        time.sleep(5)
+        self.move_to_visible_element(self.DROP_DOWN_LIST)
         self.click(self.DD_PAGE)
 
 
@@ -92,7 +89,7 @@ class DayNightMode(BaseObject):
         function just clicking to drop down list and select page
         :return:
         """
-        self.click(self.DROP_DOWN_LIST)
+        self.move_to_visible_element(self.DROP_DOWN_LIST)
         self.click(self.IC_PAGE)
 
 
@@ -101,7 +98,7 @@ class DayNightMode(BaseObject):
         function just clicking to drop down list and select page
         :return:
         """
-        self.click(self.DROP_DOWN_LIST)
+        self.move_to_visible_element(self.DROP_DOWN_LIST)
         self.click(self.CS_PAGE)
 
     def page_check_validate(self):
@@ -109,7 +106,7 @@ class DayNightMode(BaseObject):
         function just clicking to drop down list and select page
         :return:
         """
-        self.click(self.DROP_DOWN_LIST)
+        self.move_to_visible_element(self.DROP_DOWN_LIST)
         self.click(self.CV_PAGE)
 
     def page_sort_by(self):
@@ -117,7 +114,7 @@ class DayNightMode(BaseObject):
         function just clicking to drop down list and select page
         :return:
         """
-        self.click(self.DROP_DOWN_LIST)
+        self.move_to_visible_element(self.DROP_DOWN_LIST)
         self.click(self.SB_PAGE)
 
 
@@ -126,7 +123,7 @@ class DayNightMode(BaseObject):
         function for the clicking back button in order to go back and select next page
         :return:
         """
-        self.click(locator=self.BACK_BTN, timeout=15)
+        self.click(locator=self.BACK_BTN)
 
     def page_surfing(self, mode):
         """
